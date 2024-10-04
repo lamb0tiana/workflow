@@ -1,6 +1,15 @@
 <html>
 <script src="dist/bundle.js"></script>
-<body>
+<style>
+    #drawflow{
+        border: 1px solid red;
+        width: 100%;
+    }
+</style>
+<body style="display: flex">
+<div id="palette">
+    <div class="node" data-type="myNode" draggable="true">Mon Node</div>
+</div>
 <div id="drawflow"></div>
 </body>
 </html>
