@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "ESNext",
+    "strict": true,
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "rootDir": "app",
+    "watch": true,
+    "sourceMap": true
+  },
+  "include": ["app/**/*.ts"],
+  "exclude": ["node_modules"]
+}

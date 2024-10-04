@@ -1,0 +1,16 @@
+{
+  "name": "typescript-live-reload",
+  "version": "1.0.0",
+  "description": "Un projet TypeScript avec live reload pour HTML",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "start": "lite-server --baseDir=dist",
+    "dev": "concurrently \"pnpm run watch\" \"pnpm run start\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1",
+    "lite-server": "^2.5.4",
+    "typescript": "^4.0.0"
+  }
+}
