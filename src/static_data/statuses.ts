@@ -1,6 +1,6 @@
 import {statusType} from "@/lib/constant.ts";
-
-const statuses: Partial<Record<statusType, string>>[] = [
+export type statusItemType = Partial<Record<statusType, string>>
+const statuses: statusItemType[] = [
     {
         new: "#cf6037"
     },

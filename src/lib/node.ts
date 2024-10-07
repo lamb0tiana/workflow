@@ -1,6 +1,40 @@
 import Drawflow from "drawflow";
 import {nodeType, statusType} from "@/lib/constant.ts";
-import statuses from "@/static_data/statuses.ts";
+import statuses, {statusItemType} from "@/static_data/statuses.ts";
+
+const handleChange = (e: Event, type: nodeType) => {
+
+    if (e.target) {
+        const el = e.target as HTMLSelectElement
+        if (type === "status") {
+            const a = statuses.find((status: statusItemType) => status[el.value as statusType])
+            if (a)
+                el.style.backgroundColor = Object.values(a)[0]
+        }
+
+    }
+
+}
+window.handleChange = handleChange;
+
+const renderOptions = (type: nodeType) => {
+    let template: string = ''
+    if (type === "status") {
+        const first = statuses[0]
+        const defaultColor = Object.values(first)[0]
+        template = `<select class="select" style="background-color: ${defaultColor}" onchange="handleChange(event, '${type}')">`
+
+
+        template += statuses.map((status: object) => {
+            const value = Object.keys(status)[0]
+            const color = Object.values(status)[0]
+            return `<option style="background-color: ${color}" data-color="${color}" value=${value}>${value}</option>`
+        })
+        template += `</select>`
+    }
+
+    return template
+}
 
 const handleDrag = (id: HTMLElement, editor: Drawflow) => {
     const paletteItems = document.querySelectorAll<HTMLDivElement>('#palette .node');
@@ -23,18 +57,8 @@ const handleDrag = (id: HTMLElement, editor: Drawflow) => {
         const rect = id.getBoundingClientRect();
         const x: number = e.clientX - rect.left;
         const y: number = e.clientY - rect.top;
-        let template: string = `<select class="select" >`
-        if (type === "status") {
-            template += statuses.map((status: object) => {
-                const key = Object.keys(status)[0]
-                const value = Object.values(status)[0]
-                return `<option style="background-color: ${value}" value=${value}>${key}</option>`
 
-            })
-
-        }
-        template += `</select>`
-        editor.addNode(type, 1, 1, x, y, type, {}, template, false);
+        editor.addNode(type, 1, 1, x, y, type, {}, renderOptions(type), false);
     });
 }
 

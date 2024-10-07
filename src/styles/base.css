@@ -15,6 +15,7 @@
     }
 }
 .select{
+    appearance: none;
     @apply block w-full p-2  text-sm text-gray-900  rounded-lg  text-center uppercase ;
     option{
         @apply font-bold
