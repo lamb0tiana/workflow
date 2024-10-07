@@ -4,22 +4,28 @@
     <meta charset="UTF-8"/>
     <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Vite + TS</title>
-    <style>
-        #drawflow {
-            border: 1px solid red;
-            width: 100%;
-        }
-    </style>
+    <title>Workflow</title>
+
 </head>
 <body>
-<div class="container flex w-full m-auto">
-    <div id="palette" class="w-1/4">
-        <div class="node" data-type="myNode" draggable="true">Mon Node</div>
+<div class=" flex  mx-auto">
+    <div id="palette" class="w-1/12 mt-5 px-2">
+        <div class="flex flex-col text-center">
+            <button class="node btn" data-type="status"  draggable="true">
+                status
+            </button>
+        </div>
+        <div class="flex flex-col text-center">
+            <button class="node btn text-center" data-type="action"  draggable="true">Action</button>
+        </div>
+        <div class="flex flex-col text-center">
+            <button class="node btn text-center" data-type="conditions"  draggable="true">Conditions</button>
+        </div>
     </div>
 
-    <div id="drawflow" class="h-screen w-full w-3/4"></div>
+    <div id="drawflow" class="h-screen w-full bg-gray-200"></div>
 </div>
+
 
 <script type="module" src="/src/main.ts"></script>
 </body>
