@@ -27,4 +27,9 @@ window.addEventListener("load", () => {
     editor.start();
 
     handleDrag(id, editor)
+
+    document.getElementById('export_action')?.addEventListener('click', () => {
+        const data = editor.export()
+        console.log(data)
+    })
 });

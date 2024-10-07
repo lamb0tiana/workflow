@@ -1,8 +1,8 @@
 import Drawflow from "drawflow";
 import {nodeType, statusType} from "@/lib/constant.ts";
-import statuses, {statusItemType} from "@/static_data/statuses.ts";
-import actions from "@/static_data/action.ts";
-import {fields, operators, values} from "@/static_data/conditions.ts";
+import statuses, {get_statuses_template, statusItemType} from "@/static_data/statuses.ts";
+import {get_actions_template} from "@/static_data/action.ts";
+import {get_conditions_template} from "@/static_data/conditions.ts";
 
 const handleChange = (e: Event, type: nodeType) => {
     if (e.target) {
@@ -20,31 +20,15 @@ const renderOptions = (type: nodeType) => {
     let template = ""
     switch (type) {
         case "status":
-            template = `<select class="select" onchange="handleChange(event, '${type}')">`
-            template += statuses.map((status: object) => {
-                const value = Object.keys(status)[0]
-                const color = Object.values(status)[0]
-                return `<option data-color="${color}" value=${value}>${value}</option>`
-            })
-            template += `</select>`
-
+            template = get_statuses_template()
             break;
         case "action":
-            template = `<select class="select" onchange="handleChange(event, '${type}')">`
-            template += actions.map(action => `<option value=${action}>${action}</option>`)
-            template += `</select>`
+            template = get_actions_template()
 
             break;
         case "conditions":
-            template = `<select class="select" name="condition" onchange="handleChange(event, '${type}')">`
-            template += fields.map(field => `<option value=${field}>${field}</option>`)
-            template += `</select>`
-            template += `<select class="select" name="operator_value">`
-            template += operators.map(field => `<option value=${field}>${field}</option>`)
-            template += `</select>`
-            template += `<select class="select" name="condition_value">`
-            template += values.map(field => `<option value=${field}>${field}</option>`)
-            template += `</select>`
+             template = get_conditions_template();
+
     }
     return template
 }
