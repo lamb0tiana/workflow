@@ -22,7 +22,7 @@ const handleDrag = (id: HTMLElement, editor: Drawflow) => {
         const x: number = e.clientX - rect.left;
         const y: number = e.clientY - rect.top;
 
-        editor.addNode(type, 1, 1, x, y, '', {}, type, false);
+        editor.addNode(type, 1, 1, x, y, type, {}, type, false);
     });
 }
 
