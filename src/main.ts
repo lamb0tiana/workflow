@@ -2,7 +2,7 @@ import Drawflow from 'drawflow'
 import '@/styles/base.css'
 import 'drawflow/dist/drawflow.min.css'
 import '@/styles/workflow.scss'
-import {handleDrag} from "@/lib/functions";
+import {handleDrag} from "@/lib/node.ts";
 
 
 window.addEventListener("load", () => {

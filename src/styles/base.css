@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.btn {
+    @apply font-bold py-2 px-4 rounded uppercase text-xs;
+
+    &[data-type="status"]{
+        @apply bg-status
+    }
+    &[data-type="action"]{
+        @apply bg-action
+    }
+    &[data-type="conditions"]{
+        @apply bg-condition
+    }
+}
+.select{
+    @apply block w-full p-2  text-sm text-gray-900  rounded-lg  text-center uppercase ;
+    option{
+        @apply font-bold
+
+    }
+}
