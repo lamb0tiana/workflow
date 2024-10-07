@@ -8,8 +8,8 @@ const handleChange = (e: Event, type: nodeType) => {
         const el = e.target as HTMLSelectElement
         if (type === "status") {
             const a = statuses.find((status: statusItemType) => status[el.value as statusType])
-            if (a)
-                el.style.backgroundColor = Object.values(a)[0]
+            if (a && el.parentNode?.parentNode)
+                el.parentNode.parentNode.style.backgroundColor = Object.values(a)[0]
         }
 
     }
@@ -20,15 +20,14 @@ window.handleChange = handleChange;
 const renderOptions = (type: nodeType) => {
     let template: string = ''
     if (type === "status") {
-        const first = statuses[0]
-        const defaultColor = Object.values(first)[0]
-        template = `<select class="select" style="background-color: ${defaultColor}" onchange="handleChange(event, '${type}')">`
+
+        template = `<select class="select" onchange="handleChange(event, '${type}')">`
 
 
         template += statuses.map((status: object) => {
             const value = Object.keys(status)[0]
             const color = Object.values(status)[0]
-            return `<option style="background-color: ${color}" data-color="${color}" value=${value}>${value}</option>`
+            return `<option data-color="${color}" value=${value}>${value}</option>`
         })
         template += `</select>`
     }
@@ -58,7 +57,8 @@ const handleDrag = (id: HTMLElement, editor: Drawflow) => {
         const x: number = e.clientX - rect.left;
         const y: number = e.clientY - rect.top;
 
-        editor.addNode(type, 1, 1, x, y, type, {}, renderOptions(type), false);
+        editor.addNode(type, 1, 1, x, y, type, {type}, renderOptions(type), false);
+
     });
 }
 

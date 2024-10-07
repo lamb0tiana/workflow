@@ -9,7 +9,7 @@
 }
 #drawflow{
   .drawflow .drawflow-node.status{
-    @apply bg-status;
+    @apply bg-white;
   }
   .drawflow .drawflow-node.action{
     @apply bg-action

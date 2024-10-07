@@ -16,7 +16,8 @@
 }
 .select{
     appearance: none;
-    @apply block w-full p-2  text-sm text-gray-900  rounded-lg  text-center uppercase ;
+    border: none;
+    @apply block w-full p-2  text-sm text-gray-900  rounded-lg  text-center uppercase bg-white;
     option{
         @apply font-bold
 
