@@ -2,9 +2,9 @@ import Drawflow from "drawflow";
 import {nodeType, statusType} from "@/lib/constant.ts";
 import statuses, {statusItemType} from "@/static_data/statuses.ts";
 import actions from "@/static_data/action.ts";
+import {fields, operators, values} from "@/static_data/conditions.ts";
 
 const handleChange = (e: Event, type: nodeType) => {
-
     if (e.target) {
         const el = e.target as HTMLSelectElement
         if (type === "status") {
@@ -12,25 +12,40 @@ const handleChange = (e: Event, type: nodeType) => {
             if (a && el.parentNode?.parentNode)
                 el.parentNode.parentNode.style.backgroundColor = Object.values(a)[0]
         }
-
     }
-
 }
 window.handleChange = handleChange;
 
 const renderOptions = (type: nodeType) => {
-    let template: string =  `<select class="select" onchange="handleChange(event, '${type}')">`
-    if (type === "status") {
-        template += statuses.map((status: object) => {
-            const value = Object.keys(status)[0]
-            const color = Object.values(status)[0]
-            return `<option data-color="${color}" value=${value}>${value}</option>`
-        })
+    let template = ""
+    switch (type) {
+        case "status":
+            template = `<select class="select" onchange="handleChange(event, '${type}')">`
+            template += statuses.map((status: object) => {
+                const value = Object.keys(status)[0]
+                const color = Object.values(status)[0]
+                return `<option data-color="${color}" value=${value}>${value}</option>`
+            })
+            template += `</select>`
 
-    } else if (type === "action") {
-        template += actions.map(action => `<option>${action}</option>`)
+            break;
+        case "action":
+            template = `<select class="select" onchange="handleChange(event, '${type}')">`
+            template += actions.map(action => `<option value=${action}>${action}</option>`)
+            template += `</select>`
+
+            break;
+        case "conditions":
+            template = `<select class="select" name="condition" onchange="handleChange(event, '${type}')">`
+            template += fields.map(field => `<option value=${field}>${field}</option>`)
+            template += `</select>`
+            template += `<select class="select" name="operator_value">`
+            template += operators.map(field => `<option value=${field}>${field}</option>`)
+            template += `</select>`
+            template += `<select class="select" name="condition_value">`
+            template += values.map(field => `<option value=${field}>${field}</option>`)
+            template += `</select>`
     }
-    template += `</select>`
     return template
 }
 

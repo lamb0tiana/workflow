@@ -15,7 +15,10 @@
     @apply bg-transparent border-none
   }
   .drawflow .drawflow-node.conditions{
-    @apply bg-condition
+    @apply bg-condition w-1/5;
+    > div.drawflow_content_node{
+      @apply flex gap-3
+    }
   }
   .drawflow .drawflow-node {
     .input{
