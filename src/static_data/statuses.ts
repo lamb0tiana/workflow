@@ -1,4 +1,5 @@
-import {statusType} from "@/lib/constant.ts";
+import { statusType} from "@/lib/constant.ts";
+
 export type statusItemType = Partial<Record<statusType, string>>
 const statuses: statusItemType[] = [
     {
@@ -12,9 +13,17 @@ const statuses: statusItemType[] = [
     }
 ]
 
-
+const handleChange = (e: Event) => {
+    if (e.target) {
+        const el = e.target as HTMLSelectElement
+        const a = statuses.find((status: statusItemType) => status[el.value as statusType])
+        if (a && el.parentNode?.parentNode)
+            el.parentNode.parentNode.style.backgroundColor = Object.values(a)[0]
+    }
+}
+window.handleChange = handleChange;
 const get_statuses_template = () => `
-<select class="select" >
+<select class="select" onchange="handleChange(event)">
     ${statuses.map((status) => {
     const value = Object.keys(status)[0];
     const color = Object.values(status)[0];

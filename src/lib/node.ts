@@ -1,20 +1,10 @@
 import Drawflow from "drawflow";
-import {nodeType, statusType} from "@/lib/constant.ts";
-import statuses, {get_statuses_template, statusItemType} from "@/static_data/statuses.ts";
+import {nodeType} from "@/lib/constant.ts";
+import  {get_statuses_template} from "@/static_data/statuses.ts";
 import {get_actions_template} from "@/static_data/action.ts";
 import {get_conditions_template} from "@/static_data/conditions.ts";
 
-const handleChange = (e: Event, type: nodeType) => {
-    if (e.target) {
-        const el = e.target as HTMLSelectElement
-        if (type === "status") {
-            const a = statuses.find((status: statusItemType) => status[el.value as statusType])
-            if (a && el.parentNode?.parentNode)
-                el.parentNode.parentNode.style.backgroundColor = Object.values(a)[0]
-        }
-    }
-}
-window.handleChange = handleChange;
+
 
 const renderOptions = (type: nodeType) => {
     let template = ""
@@ -24,7 +14,6 @@ const renderOptions = (type: nodeType) => {
             break;
         case "action":
             template = get_actions_template()
-
             break;
         case "conditions":
              template = get_conditions_template();
