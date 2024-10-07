@@ -1,9 +1,10 @@
 import Drawflow from 'drawflow'
+import '@/styles/base.css'
 import 'drawflow/dist/drawflow.min.css'
-import {handleDrag} from "../lib/flow";
+import {handleDrag} from "@/lib/functions";
 
 
-window.addEventListener("load", (event) => {
+window.addEventListener("load", () => {
     const id = document.getElementById("drawflow") as HTMLElement;
 
     const editor = new Drawflow(id);
@@ -12,4 +13,3 @@ window.addEventListener("load", (event) => {
 
     handleDrag(id, editor)
 });
-

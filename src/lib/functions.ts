@@ -1,11 +1,13 @@
 import Drawflow from "drawflow";
 
 const handleDrag = (id: HTMLElement, editor: Drawflow) => {
-    const paletteItems = document.querySelectorAll('#palette .node');
+    const paletteItems = document.querySelectorAll<HTMLDivElement>('#palette .node');
     paletteItems.forEach(item => {
-        item.addEventListener('dragstart', (e) => {
-            e.dataTransfer.setData('text/plain', item.getAttribute('data-type'));
-            e.dataTransfer.effectAllowed = "move";
+        item.addEventListener('dragstart', (e: DragEvent) => {
+            if(e.dataTransfer) {
+                e.dataTransfer.setData('text/plain', item.getAttribute('data-type')||'');
+                e.dataTransfer.effectAllowed = "move";
+            }
         });
     });
     id.addEventListener('dragover', (e: DragEvent) => {
@@ -20,7 +22,6 @@ const handleDrag = (id: HTMLElement, editor: Drawflow) => {
         const x: number = e.clientX - rect.left;
         const y: number = e.clientY - rect.top;
 
-        // Ajoute le node à Drawflow
         editor.addNode(type, 1, 1, x, y, '', {}, type, false);
     });
 }

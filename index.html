@@ -1,15 +1,26 @@
-<html>
-<script src="dist/bundle.js"></script>
-<style>
-    #drawflow{
-        border: 1px solid red;
-        width: 100%;
-    }
-</style>
-<body style="display: flex">
-<div id="palette">
-    <div class="node" data-type="myNode" draggable="true">Mon Node</div>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Vite + TS</title>
+    <style>
+        #drawflow {
+            border: 1px solid red;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="container flex w-full m-auto">
+    <div id="palette" class="w-1/4">
+        <div class="node" data-type="myNode" draggable="true">Mon Node</div>
+    </div>
+
+    <div id="drawflow" class="h-screen w-full w-3/4"></div>
 </div>
-<div id="drawflow"></div>
+
+<script type="module" src="/src/main.ts"></script>
 </body>
 </html>
