@@ -1,6 +1,7 @@
 import Drawflow from "drawflow";
 import {nodeType, statusType} from "@/lib/constant.ts";
 import statuses, {statusItemType} from "@/static_data/statuses.ts";
+import actions from "@/static_data/action.ts";
 
 const handleChange = (e: Event, type: nodeType) => {
 
@@ -18,20 +19,18 @@ const handleChange = (e: Event, type: nodeType) => {
 window.handleChange = handleChange;
 
 const renderOptions = (type: nodeType) => {
-    let template: string = ''
+    let template: string =  `<select class="select" onchange="handleChange(event, '${type}')">`
     if (type === "status") {
-
-        template = `<select class="select" onchange="handleChange(event, '${type}')">`
-
-
         template += statuses.map((status: object) => {
             const value = Object.keys(status)[0]
             const color = Object.values(status)[0]
             return `<option data-color="${color}" value=${value}>${value}</option>`
         })
-        template += `</select>`
-    }
 
+    } else if (type === "action") {
+        template += actions.map(action => `<option>${action}</option>`)
+    }
+    template += `</select>`
     return template
 }
 
