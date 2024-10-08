@@ -1,4 +1,4 @@
-import {add_item_button, createRow} from "@/lib/tools/conditions.ts";
+import {createRow} from "@/lib/tools/conditions.ts";
 
 export type ConditionType = {
     field: string
@@ -70,7 +70,7 @@ const get_conditions_template = () => `
 <div class="container flex flex-col gap-2">
     <div class="rows">
         <div class="flex gap-3">    
-            ${createRow() + add_item_button()} 
+            ${createRow()} 
         </div>
     </div>
 
