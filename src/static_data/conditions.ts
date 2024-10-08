@@ -65,13 +65,13 @@ const conditions_candidates: ConditionType[] = [{
     }
 
 ]
-window.remove_item_row = (event: MouseEvent) => {
+window.remove_condition_item_row = (event: MouseEvent) => {
     event.target?.parentElement.remove()
 }
 
 window.add_condition_row = (e: Event) => {
     const container = e.target?.parentElement.parentElement;
-    container.innerHTML += `<div class="flex gap-3 mt-2">${createRow()}<img  onclick="remove_item_row(event)" src="/icons/trash.svg" class="w-5 ml-0.5 hover:cursor-pointer" alt="trash"/> </div>`
+    container.innerHTML += `<div class="flex gap-3 mt-2">${createRow()}<img  onclick="remove_condition_item_row(event)" src="/icons/trash.svg" class="w-5 ml-0.5 hover:cursor-pointer" alt="trash"/> </div>`
 }
 
 

@@ -13,7 +13,7 @@ const statuses: statusItemType[] = [
     }
 ]
 
-const handleChange = (e: Event) => {
+window.handleStatusChange =  (e: Event) => {
     if (e.target) {
         const el = e.target as HTMLSelectElement
         const a = statuses.find((status: statusItemType) => status[el.value as statusType])
@@ -21,9 +21,8 @@ const handleChange = (e: Event) => {
             el.parentNode.parentNode.style.backgroundColor = Object.values(a)[0]
     }
 }
-window.handleChange = handleChange;
 const get_statuses_template = () => `
-<select class="select" onchange="handleChange(event)">
+<select class="select" onchange="handleStatusChange(event)">
     ${statuses.map((status) => {
     const value = Object.keys(status)[0];
     const color = Object.values(status)[0];
