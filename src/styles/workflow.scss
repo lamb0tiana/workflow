@@ -24,8 +24,8 @@
     .input{
       background: black;
     }
-    .drawflow_content_node{
-      @apply uppercase text-center font-bold text-xs text-amber-100;
+    .drawflow_content_node, input{
+      @apply uppercase text-center font-bold text-xs [&&]:text-amber-100;
     }
   }
 }

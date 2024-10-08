@@ -1,6 +1,6 @@
-import {createRow} from "@/lib/tools/conditions.ts";
+import {add_item_button, createRow} from "@/lib/tools/conditions.ts";
 
-type ConditionType = {
+export type ConditionType = {
     field: string
     operators: Record<"label" | "value", string>[]
     values: string[] | null
@@ -65,26 +65,16 @@ const conditions_candidates: ConditionType[] = [{
     }
 
 ]
-window.remove_condition_item_row = (event: MouseEvent) => {
-    event.target?.parentElement.remove()
-}
-
-window.add_condition_row = (e: Event) => {
-    const container = e.target?.parentElement.parentElement;
-    container.innerHTML += `<div class="flex gap-3 mt-2">${createRow()}<img  onclick="remove_condition_item_row(event)" src="/icons/trash.svg" class="w-5 ml-0.5 hover:cursor-pointer" alt="trash"/> </div>`
-}
-
 
 const get_conditions_template = () => `
 <div class="container flex flex-col gap-2">
     <div class="rows">
         <div class="flex gap-3">    
-            ${createRow()} 
-             <img  onclick="add_condition_row(event)" src="/icons/add.svg" class="w-6 hover:cursor-pointer" alt="trash"/> 
+            ${createRow() + add_item_button()} 
         </div>
     </div>
 
 </div>
 
 `
-export {get_conditions_template,  conditions_candidates}
+export {get_conditions_template, conditions_candidates}
