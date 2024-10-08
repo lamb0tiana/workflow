@@ -1,8 +1,8 @@
 import {conditions_candidates, ConditionType} from "@/static_data/conditions.ts";
 
-enum ButtonAction {
-    ADD = 'ADD',
-    DELETE = 'DELETE'
+export enum ButtonConditionItemActionRow {
+    ADD_CONDITION_ITEM = 'ADD_CONDITION_ITEM',
+    DELETE_CONDITION_ITEM = 'DELETE_CONDITION_ITEM'
 }
 
 const remove_item_button = () => `<img  onclick="remove_condition_item_row(event)" src="/icons/trash.svg" class="w-5 ml-0.5 hover:cursor-pointer" alt="trash"/> `
@@ -13,7 +13,7 @@ window.handleFieldChange = (e: Event) => {
     const source = conditions_candidates.find(c => c.field.trim() === selectedValue);
 
     if (source) {
-        updateRow(source, target.parentElement, ButtonAction.DELETE);
+        updateRow(source, ButtonConditionItemActionRow.DELETE_CONDITION_ITEM, target.parentElement);
     }
 };
 window.remove_condition_item_row = (event: MouseEvent) => {
@@ -22,10 +22,10 @@ window.remove_condition_item_row = (event: MouseEvent) => {
 
 window.add_condition_row = (e: Event) => {
     const container = e.target?.parentElement.parentElement;
-    container.innerHTML += `<div class="flex gap-3 mt-2">${createRow()}</div>`
+    container.innerHTML += `<div class="flex gap-3 mt-2">${createRow(ButtonConditionItemActionRow.DELETE_CONDITION_ITEM)}</div>`
 }
 
-const updateRow = (source: ConditionType, rowContainer: HTMLElement | null = null, action: ButtonAction = ButtonAction.ADD) => {
+const updateRow = (source: ConditionType, action: ButtonConditionItemActionRow, rowContainer: HTMLElement | null = null) => {
     const isFirstRow = rowContainer?.parentElement?.childElementCount === 1
     let rowContent = `
         <select class="select" name="condition" onchange="handleFieldChange(event)">   
@@ -41,14 +41,14 @@ const updateRow = (source: ConditionType, rowContainer: HTMLElement | null = nul
         `<input type="text" name="condition_value" placeholder="(null)" />`}
         
     `;
-    rowContent += isFirstRow || action == ButtonAction.ADD ? add_item_button() : remove_item_button()
+    rowContent += isFirstRow || action == ButtonConditionItemActionRow.ADD_CONDITION_ITEM ? add_item_button() : remove_item_button()
     if (!rowContainer) return rowContent
     rowContainer.innerHTML = rowContent;
 };
 
-const createRow = () => {
+const createRow = (action: ButtonConditionItemActionRow) => {
     const defaultSource = conditions_candidates[0];
-    return updateRow(defaultSource);
+    return updateRow(defaultSource, action);
 };
 
 export {createRow};
