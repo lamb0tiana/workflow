@@ -66,7 +66,7 @@ const conditions_candidates: ConditionType[] = [{
 
 ]
 
-const get_conditions_template = () => `
+const get_conditions_template = () : string => `
 <div class="container flex flex-col gap-2">
     <div class="rows">
         <div class="flex gap-3">    

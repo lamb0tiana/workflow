@@ -25,13 +25,16 @@ window.add_condition_row = (e: Event) => {
     container.innerHTML += `<div class="flex gap-3 mt-2">${createRow(ButtonConditionItemActionRow.DELETE_CONDITION_ITEM)}</div>`
 }
 
+window.handleSelection = (e: Event) => {
+    console.log(e.target?.value, this?.value)
+}
 const updateRow = (source: ConditionType, action: ButtonConditionItemActionRow, rowContainer: HTMLElement | null = null) => {
     const isFirstRow = rowContainer?.parentElement?.childElementCount === 1
     let rowContent = `
         <select class="select" name="condition" onchange="handleFieldChange(event)">   
             ${conditions_candidates.map(candidate => `<option ${candidate.field === source.field ? 'selected' : ''}>${candidate.field}</option>`).join('')}
         </select>
-        <select class="select" name="operator_value">
+        <select class="select" name="operator_value" onchange="handleSelection(event)">
             ${source.operators.map(operator => `<option value="${operator.value}">${operator.label}</option>`).join('')}
         </select>
         ${source.values ?

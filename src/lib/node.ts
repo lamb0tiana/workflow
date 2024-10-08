@@ -6,20 +6,17 @@ import {get_conditions_template} from "@/static_data/conditions.ts";
 
 
 
-const renderOptions = (type: nodeType) => {
-    let template = ""
+const renderOptions = (type: nodeType) : string => {
     switch (type) {
         case "status":
-            template = get_statuses_template()
-            break;
+            return get_statuses_template()
         case "action":
-            template = get_actions_template()
-            break;
+            return get_actions_template()
         case "conditions":
-             template = get_conditions_template();
+             return  get_conditions_template();
 
     }
-    return template
+    return ""
 }
 
 const handleDrag = (id: HTMLElement, editor: Drawflow) => {
