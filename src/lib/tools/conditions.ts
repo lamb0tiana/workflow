@@ -4,7 +4,6 @@ const operators = [
     '==', '!=', '>', '<', '>=', '<='
 
 ];
-const createButton = (): HTMLButtonElement => document.createElement('button')
 const row = `    
         <select class="select" name="condition">
             ${fields.map(field => `<option value="${field}">${field}</option>`).join('')}
@@ -17,4 +16,4 @@ const row = `
         </select>
     `
 
-export { row, createButton}
+export { row}

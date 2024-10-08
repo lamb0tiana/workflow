@@ -1,14 +1,13 @@
-import {createButton, row} from "@/lib/tools/conditions.ts";
+import { row} from "@/lib/tools/conditions.ts";
+
+window.remove_item_row = (event: MouseEvent) => {
+    event.target?.parentElement.remove()
+}
 
 window.add_condition_row = (e: Event) => {
     const container = e.target?.parentElement.parentElement;
-    const deleteButton = createButton()
-    deleteButton.textContent = '-'
-    deleteButton.classList.add('btn','danger')
-    container.innerHTML += `<div class="flex gap-3 mt-2">${row}</div>`
-    container.lastChild.append(deleteButton)
+    container.innerHTML += `<div class="flex gap-3 mt-2">${row}<img  onclick="remove_item_row(event)" src="/icons/trash.svg" class="w-4 hover:cursor-pointer" alt="trash"/> </div>`
 }
-
 
 
 const get_conditions_template = () => `
