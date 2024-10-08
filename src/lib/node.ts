@@ -1,19 +1,18 @@
 import Drawflow from "drawflow";
 import {nodeType} from "@/lib/constant.ts";
-import  {get_statuses_template} from "@/static_data/statuses.ts";
+import {get_statuses_template} from "@/static_data/statuses.ts";
 import {get_actions_template} from "@/static_data/action.ts";
 import {get_conditions_template} from "@/static_data/conditions.ts";
 
 
-
-const renderOptions = (type: nodeType) : string => {
+const renderOptions = (type: nodeType): string => {
     switch (type) {
         case "status":
             return get_statuses_template()
         case "action":
             return get_actions_template()
         case "conditions":
-             return  get_conditions_template();
+            return get_conditions_template();
 
     }
     return ""
