@@ -2,6 +2,7 @@ export enum statusType {
     New = "new",
     Pending = "pending",
     Processed = "processed",
+    Delayed = "delayed"
 }
 
 

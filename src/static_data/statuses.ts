@@ -10,6 +10,9 @@ const statuses: statusItemType[] = [
     },
     {
         processed: "#098e47"
+    },
+    {
+        delayed: "#bc1158"
     }
 ]
 
