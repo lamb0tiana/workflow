@@ -25,7 +25,7 @@ window.add_condition_row = (e: Event) => {
     const container = e.target?.parentElement.parentElement;
     const _row= `<div class="flex gap-3 mt-2">${createRow(ButtonConditionItemActionRow.DELETE_CONDITION_ITEM)}</div>`
     const doc = parser.parseFromString(_row, 'text/html')
-    container.appendChild(doc.firstElementChild)
+    container.appendChild(doc.body.firstElementChild)
 }
 
 window.handleSelection = (e: Event) => {
