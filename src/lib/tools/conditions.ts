@@ -1,19 +1,19 @@
-const fields = Array.from({length: 10}, (_v, i) => 'field ' + (i + 1))
-const values = Array.from({length: 10}, (_v, i) => 'value ' + (1 + i))
-const operators = [
-    '==', '!=', '>', '<', '>=', '<='
+import {conditions_candidates} from "@/static_data/conditions.ts";
 
-];
-const row = `    
-        <select class="select" name="condition">
-            ${fields.map(field => `<option value="${field}">${field}</option>`).join('')}
+const createRow = () => {
+
+    return `
+        <select class="select" name="condition">   
+            ${conditions_candidates.map(candidate => `<option>${candidate.field}</option>`)}
         </select>
         <select class="select" name="operator_value">
-            ${operators.map(field => `<option value="${field}">${field}</option>`).join('')}
+            ${conditions_candidates[0].operators.map(operator => `<option value="${operator.value}">${operator.label}</option>`)}
         </select>
-        <select class="select" name="condition_value">
-            ${values.map(field => `<option value="${field}">${field}</option>`).join('')}
-        </select>
-    `
+        ${conditions_candidates[0].values ?
+        `<select class="select" name="condition_value">
+            ${conditions_candidates[0].values.map(value => `<option value="${value}">${value || '(null)'}</option>`)}
+        </select>` : `<input/>`}
+    `;
+};
 
-export { row}
+export {createRow};
