@@ -5,17 +5,18 @@ import '@/styles/workflow.scss'
 import {handleDrag} from "@/lib/node.ts";
 import statuses from "@/static_data/statuses.ts";
 let selectionId: number = 0
+let editor: Drawflow;
 
-export {selectionId}
+export {selectionId, editor}
 
 window.addEventListener("load", () => {
     const id = document.getElementById("drawflow") as HTMLElement;
 
-    const editor = new Drawflow(id);
+    editor = new Drawflow(id);
     editor.on('nodeCreated', (e) => {
         const el = editor.getNodeFromId(e)
-
         if (el.data.type === 'status') {
+            //set default background status type node
             const first = statuses[0]
             const defaultColor = Object.values(first)[0]
 
