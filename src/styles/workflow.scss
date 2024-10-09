@@ -9,7 +9,7 @@
 }
 #drawflow{
   .drawflow .drawflow-node.status{
-    @apply bg-white;
+    @apply bg-white w-2/12;
   }
   .drawflow .drawflow-node.action{
     @apply bg-transparent border-none

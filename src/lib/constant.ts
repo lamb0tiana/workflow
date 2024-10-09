@@ -1,8 +1,9 @@
 export enum statusType {
-    New = "new",
-    Pending = "pending",
-    Processed = "processed",
-    Delayed = "delayed"
+    "A traiter CRC" = "A traiter CRC",
+    "En cours CRC" = "En cours CRC",
+    "A traiter VN" = "A traiter VN",
+    "En cours VN" = "En cours VN",
+    "Clos" = "Clos"
 }
 
 

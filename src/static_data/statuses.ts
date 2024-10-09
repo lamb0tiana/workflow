@@ -4,16 +4,19 @@ import {editor, selectionId} from "@/main.ts";
 export type statusItemType = Partial<Record<statusType, string>>
 const statuses: statusItemType[] = [
     {
-        new: "#cf6037"
+        "A traiter CRC": "#e83a75"
     },
     {
-        pending: "#c8c23e"
+        "En cours CRC": "#e2bb33"
     },
     {
-        processed: "#098e47"
+        "A traiter VN": "#e83a75"
     },
     {
-        delayed: "#bc1158"
+        "En cours VN": "#e2bb33"
+    },
+    {
+        "Clos":"#bebebe"
     }
 ]
 
