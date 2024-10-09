@@ -29,3 +29,12 @@
     }
   }
 }
+
+
+.notification{
+  &.alert{
+    @apply font-bold;
+    background: theme('colors.red.600') !important;
+
+  }
+}
