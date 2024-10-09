@@ -1,5 +1,6 @@
 import {conditions_candidates, ConditionType} from "@/static_data/conditions.ts";
 import {selectionId} from "@/main.ts";
+import {extractFormData, generateUUID} from "@/lib/tools/functions.ts";
 
 export enum ButtonConditionItemActionRow {
     ADD_CONDITION_ITEM = 'ADD_CONDITION_ITEM',
@@ -8,14 +9,18 @@ export enum ButtonConditionItemActionRow {
 
 const remove_item_button = () => `<img  onclick="remove_condition_item_row(event)" src="/icons/trash.svg" class="w-5 ml-0.5 hover:cursor-pointer" alt="trash"/> `
 const add_item_button = () => `<img  onclick="add_condition_row(event)" src="/icons/add.svg" class="w-6 hover:cursor-pointer" alt="plus"/> `
+
+
+
+
 window.handleFieldChange = (e: Event) => {
-    console.log(selectionId)
     const target = e.target as HTMLSelectElement;
     const selectedValue = target.value.trim();
     const source = conditions_candidates.find(c => c.field.trim() === selectedValue);
 
     if (source) {
         updateRow(source, ButtonConditionItemActionRow.DELETE_CONDITION_ITEM, target.parentElement);
+        handleSelection(e)
     }
 };
 window.remove_condition_item_row = (event: MouseEvent) => {
@@ -29,25 +34,23 @@ window.add_condition_row = (e: Event) => {
     const doc = parser.parseFromString(_row, 'text/html')
     container.appendChild(doc.body.firstElementChild)
 }
+window.demo = extractFormData
 
-window.handleSelection = (e: Event) => {
-    console.log(e.target?.value, this?.value)
-}
 const updateRow = (source: ConditionType, action: ButtonConditionItemActionRow, rowContainer: HTMLElement | null = null) => {
     const isFirstRow = rowContainer?.parentElement?.childElementCount === 1
+    const uuid = generateUUID()
     let rowContent = `
-        <select class="select" name="condition[]" onchange="handleFieldChange(event)">   
+        <select class="select" name="condition[${uuid}]" onchange="handleFieldChange(event); demo(this.closest('form'))">   
             ${conditions_candidates.map(candidate => `<option ${candidate.field === source.field ? 'selected' : ''}>${candidate.field}</option>`).join('')}
         </select>
-        <select class="select" name="operator_value[]" onchange="handleSelection(event)">
+        <select class="select" name="operator[${uuid}]" onchange="demo(this.closest('form'))">
             ${source.operators.map(operator => `<option value="${operator.value}">${operator.label}</option>`).join('')}
         </select>
         ${source.values ?
-        `<select class="select" name="condition_value[]">
+        `<select class="select" name="value[${uuid}]" onchange="demo(this.closest('form'))">
                 ${source.values.map(value => `<option value="${value}">${value || '(null)'}</option>`).join('')}
             </select>` :
-        `<input type="text" name="condition_value[]" placeholder="(null)" />`}
-        
+        `<input type="text" name="value[${uuid}]" placeholder="(null)" onchange="demo(this.closest('form'))" />`}
     `;
     rowContent += isFirstRow || action == ButtonConditionItemActionRow.ADD_CONDITION_ITEM ? add_item_button() : remove_item_button()
     if (!rowContainer) return rowContent

@@ -20,9 +20,9 @@ const statuses: statusItemType[] = [
 window.handleStatusChange = (e: Event) => {
     if (e.target) {
         const el = e.target as HTMLSelectElement
-        const a = statuses.find((status: statusItemType) => status[el.value as statusType])
-        if (a && el.parentNode?.parentNode) {
-            el.parentNode.parentNode.style.backgroundColor = Object.values(a)[0]
+        const statusCandidate = statuses.find((status: statusItemType) => status[el.value as statusType])
+        if (statusCandidate && el.parentNode?.parentNode) {
+            el.parentNode.parentNode.style.backgroundColor = Object.values(statusCandidate)[0]
         }
         editor.updateNodeDataFromId(selectionId, {status: el.value})
     }
