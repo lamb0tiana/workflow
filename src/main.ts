@@ -4,7 +4,9 @@ import 'drawflow/dist/drawflow.min.css'
 import '@/styles/workflow.scss'
 import {handleDrag} from "@/lib/node.ts";
 import statuses from "@/static_data/statuses.ts";
+let selectionId: number = 0
 
+export {selectionId}
 
 window.addEventListener("load", () => {
     const id = document.getElementById("drawflow") as HTMLElement;
@@ -24,9 +26,17 @@ window.addEventListener("load", () => {
 
         }
     })
+
     editor.start();
 
     handleDrag(id, editor)
+
+    editor.on('nodeCreated', (e) => {
+        selectionId = e
+    })
+    editor.on('nodeSelected', (e) => {
+        selectionId = e
+    })
 
     document.getElementById('export_action')?.addEventListener('click', () => {
         const data = editor.export()

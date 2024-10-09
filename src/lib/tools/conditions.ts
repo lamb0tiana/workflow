@@ -1,4 +1,5 @@
 import {conditions_candidates, ConditionType} from "@/static_data/conditions.ts";
+import {selectionId} from "@/main.ts";
 
 export enum ButtonConditionItemActionRow {
     ADD_CONDITION_ITEM = 'ADD_CONDITION_ITEM',
@@ -8,6 +9,7 @@ export enum ButtonConditionItemActionRow {
 const remove_item_button = () => `<img  onclick="remove_condition_item_row(event)" src="/icons/trash.svg" class="w-5 ml-0.5 hover:cursor-pointer" alt="trash"/> `
 const add_item_button = () => `<img  onclick="add_condition_row(event)" src="/icons/add.svg" class="w-6 hover:cursor-pointer" alt="plus"/> `
 window.handleFieldChange = (e: Event) => {
+    console.log(selectionId)
     const target = e.target as HTMLSelectElement;
     const selectedValue = target.value.trim();
     const source = conditions_candidates.find(c => c.field.trim() === selectedValue);
@@ -34,17 +36,17 @@ window.handleSelection = (e: Event) => {
 const updateRow = (source: ConditionType, action: ButtonConditionItemActionRow, rowContainer: HTMLElement | null = null) => {
     const isFirstRow = rowContainer?.parentElement?.childElementCount === 1
     let rowContent = `
-        <select class="select" name="condition" onchange="handleFieldChange(event)">   
+        <select class="select" name="condition[]" onchange="handleFieldChange(event)">   
             ${conditions_candidates.map(candidate => `<option ${candidate.field === source.field ? 'selected' : ''}>${candidate.field}</option>`).join('')}
         </select>
-        <select class="select" name="operator_value" onchange="handleSelection(event)">
+        <select class="select" name="operator_value[]" onchange="handleSelection(event)">
             ${source.operators.map(operator => `<option value="${operator.value}">${operator.label}</option>`).join('')}
         </select>
         ${source.values ?
-        `<select class="select" name="condition_value">
+        `<select class="select" name="condition_value[]">
                 ${source.values.map(value => `<option value="${value}">${value || '(null)'}</option>`).join('')}
             </select>` :
-        `<input type="text" name="condition_value" placeholder="(null)" />`}
+        `<input type="text" name="condition_value[]" placeholder="(null)" />`}
         
     `;
     rowContent += isFirstRow || action == ButtonConditionItemActionRow.ADD_CONDITION_ITEM ? add_item_button() : remove_item_button()

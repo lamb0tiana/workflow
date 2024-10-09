@@ -1,4 +1,5 @@
 import { statusType} from "@/lib/constant.ts";
+import {selectionId} from "@/main.ts";
 
 export type statusItemType = Partial<Record<statusType, string>>
 const statuses: statusItemType[] = [
@@ -18,6 +19,7 @@ const statuses: statusItemType[] = [
 
 window.handleStatusChange =  (e: Event) => {
     if (e.target) {
+        console.log(selectionId)
         const el = e.target as HTMLSelectElement
         const a = statuses.find((status: statusItemType) => status[el.value as statusType])
         if (a && el.parentNode?.parentNode)
