@@ -1,5 +1,4 @@
 import {conditions_candidates, ConditionType} from "@/static_data/conditions.ts";
-import {selectionId} from "@/main.ts";
 import {extractFormData, generateUUID} from "@/lib/tools/functions.ts";
 
 export enum ButtonConditionItemActionRow {
@@ -10,7 +9,13 @@ export enum ButtonConditionItemActionRow {
 const remove_item_button = () => `<img  onclick="remove_condition_item_row(event)" src="/icons/trash.svg" class="w-5 ml-0.5 hover:cursor-pointer" alt="trash"/> `
 const add_item_button = () => `<img  onclick="add_condition_row(event)" src="/icons/add.svg" class="w-6 hover:cursor-pointer" alt="plus"/> `
 
-
+window.handleSelection = (e: Event) => {
+    if(e.target ){
+        console.log(e.target)
+        const form = e.target.closest<HTMLElement>('form')
+        extractFormData(form)
+    }
+}
 
 
 window.handleFieldChange = (e: Event) => {
@@ -20,7 +25,6 @@ window.handleFieldChange = (e: Event) => {
 
     if (source) {
         updateRow(source, ButtonConditionItemActionRow.DELETE_CONDITION_ITEM, target.parentElement);
-        handleSelection(e)
     }
 };
 window.remove_condition_item_row = (event: MouseEvent) => {
@@ -40,7 +44,7 @@ const updateRow = (source: ConditionType, action: ButtonConditionItemActionRow, 
     const isFirstRow = rowContainer?.parentElement?.childElementCount === 1
     const uuid = generateUUID()
     let rowContent = `
-        <select class="select" name="condition[${uuid}]" onchange="handleFieldChange(event); demo(this.closest('form'))">   
+        <select class="select" name="condition[${uuid}]" onchange="handleFieldChange(event);">   
             ${conditions_candidates.map(candidate => `<option ${candidate.field === source.field ? 'selected' : ''}>${candidate.field}</option>`).join('')}
         </select>
         <select class="select" name="operator[${uuid}]" onchange="demo(this.closest('form'))">

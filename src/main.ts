@@ -39,6 +39,11 @@ window.addEventListener("load", () => {
         selectionId = e
     })
 
+    editor.on('connectionCreated', (a) => {
+        console.log(a)
+        // return true
+    })
+
     document.getElementById('export_action')?.addEventListener('click', () => {
         const data = editor.export()
         console.log(data)

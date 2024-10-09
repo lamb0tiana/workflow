@@ -1,19 +1,18 @@
 import Drawflow from "drawflow";
-import {nodeType} from "@/lib/constant.ts";
+import {NodeType} from "@/lib/constant.ts";
 import {get_statuses_template} from "@/static_data/statuses.ts";
 import {get_actions_template} from "@/static_data/action.ts";
 import {get_conditions_template} from "@/static_data/conditions.ts";
 
 
-const renderOptions = (type: nodeType): string => {
+const renderOptions = (type: NodeType): string => {
     switch (type) {
-        case "status":
+        case NodeType.status:
             return get_statuses_template()
-        case "action":
+        case NodeType.action:
             return get_actions_template()
-        case "conditions":
+        case NodeType.conditions:
             return get_conditions_template();
-
     }
     return ""
 }
@@ -35,7 +34,7 @@ const handleDrag = (id: HTMLElement, editor: Drawflow) => {
 
     id.addEventListener('drop', (e: DragEvent) => {
         e.preventDefault();
-        const type = e?.dataTransfer?.getData('text/plain') as nodeType;
+        const type = <NodeType>e?.dataTransfer?.getData('text/plain') ;
         const rect = id.getBoundingClientRect();
         const x: number = e.clientX - rect.left;
         const y: number = e.clientY - rect.top;

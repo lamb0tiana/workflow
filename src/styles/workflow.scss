@@ -12,7 +12,7 @@
     @apply bg-white w-2/12;
   }
   .drawflow .drawflow-node.action{
-    @apply bg-transparent border-none
+    @apply bg-transparent border-none w-2/12
   }
   .drawflow .drawflow-node.conditions{
     @apply bg-condition w-1/3;

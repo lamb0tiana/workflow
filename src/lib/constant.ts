@@ -6,5 +6,8 @@ export enum statusType {
     "Clos" = "Clos"
 }
 
-
-export type nodeType = "action" | "status" | "conditions"
+export enum NodeType {
+    action = "action",
+    status = "status",
+    conditions = "conditions"
+}
