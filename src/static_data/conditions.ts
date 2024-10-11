@@ -6,7 +6,8 @@ export type ConditionType = {
     values: string[] | null
 }
 
-const conditions_candidates: ConditionType[] = [{
+const conditions_candidates: ConditionType[] = [
+    {
     field: "affectaction",
     operators: [{
         label: "égale à",
@@ -65,7 +66,10 @@ const conditions_candidates: ConditionType[] = [{
     }
 
 ]
-
+window.handleChangeCondition = (e: Event<HTMLInputElement>) => {
+console.log(e)
+    console.log('okdfsdfsf')
+}
 const get_conditions_template = () : string => `
 <div class="container flex flex-col gap-2">
     <form class="rows">

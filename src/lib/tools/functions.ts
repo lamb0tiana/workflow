@@ -18,7 +18,7 @@ const extractFormData = (form: HTMLFormElement): Record<string, Record<string, s
                 if (match && match.groups) {
                     const {name, uuid} = match.groups;
 
-                    // Crée l'objet pour l'UUID s'il n'existe pas
+                    // Crée l'objet pour l'UUID s'il n'existe passd
                     if (!values[uuid]) {
                         values[uuid] = {};
                     }

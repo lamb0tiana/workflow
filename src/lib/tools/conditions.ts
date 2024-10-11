@@ -10,7 +10,7 @@ const remove_item_button = () => `<img  onclick="remove_condition_item_row(event
 const add_item_button = () => `<img  onclick="add_condition_row(event)" src="/icons/add.svg" class="w-6 hover:cursor-pointer" alt="plus"/> `
 
 window.handleSelection = (e: Event) => {
-    if(e.target ){
+    if (e.target) {
         console.log(e.target)
         const form = e.target.closest<HTMLElement>('form')
         extractFormData(form)
@@ -34,7 +34,7 @@ window.remove_condition_item_row = (event: MouseEvent) => {
 window.add_condition_row = (e: Event) => {
     const parser = new DOMParser()
     const container = e.target?.parentElement.parentElement;
-    const _row= `<div class="flex gap-3 mt-2">${createRow(ButtonConditionItemActionRow.DELETE_CONDITION_ITEM)}</div>`
+    const _row = `<div class="flex gap-3 mt-2">${createRow(ButtonConditionItemActionRow.DELETE_CONDITION_ITEM)}</div>`
     const doc = parser.parseFromString(_row, 'text/html')
     container.appendChild(doc.body.firstElementChild)
 }
