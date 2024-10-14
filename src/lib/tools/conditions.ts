@@ -1,4 +1,4 @@
-import {conditions_candidates, ConditionType} from "@/static_data/conditions.ts";
+import {conditions_candidates, ConditionFieldType} from "@/static_data/conditions.ts";
 import {extractFormData, generateUUID} from "@/lib/tools/functions.ts";
 
 export enum ButtonConditionItemActionRow {
@@ -40,7 +40,7 @@ window.add_condition_row = (e: Event) => {
 }
 window.demo = extractFormData
 
-const updateRow = (source: ConditionType, action: ButtonConditionItemActionRow, rowContainer: HTMLElement | null = null) => {
+const updateRow = (source: ConditionFieldType, action: ButtonConditionItemActionRow, rowContainer: HTMLElement | null = null) => {
     const isFirstRow = rowContainer?.parentElement?.childElementCount === 1
     const uuid = generateUUID()
     let rowContent = `

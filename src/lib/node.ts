@@ -2,7 +2,6 @@ import Drawflow from "drawflow";
 import {NodeType} from "@/lib/constant.ts";
 import {get_statuses_template} from "@/static_data/statuses.ts";
 import {get_actions_template} from "@/static_data/action.ts";
-import {get_conditions_template} from "@/static_data/conditions.ts";
 
 
 const renderOptions = (type: NodeType): string => {
@@ -11,8 +10,6 @@ const renderOptions = (type: NodeType): string => {
             return get_statuses_template()
         case NodeType.action:
             return get_actions_template()
-        case NodeType.conditions:
-            return get_conditions_template();
     }
     return ""
 }
