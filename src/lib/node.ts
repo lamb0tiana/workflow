@@ -1,7 +1,7 @@
 import Drawflow from "drawflow";
 import {NodeType} from "@/lib/constant.ts";
-import {get_statuses_template} from "@/static_data/statuses.ts";
-import {get_actions_template} from "@/static_data/action.ts";
+import {get_statuses_template} from "@/static_data/templates/status.ts";
+import {get_actions_template} from "@/static_data/templates/action.ts";
 
 
 const renderOptions = (type: NodeType): string => {

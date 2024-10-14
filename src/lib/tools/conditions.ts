@@ -1,5 +1,6 @@
-import {ConditionFieldType, conditions_candidates, ConditionType} from "@/static_data/conditions.ts";
+import {ConditionFieldType,  ConditionType} from "@/static_data/templates/conditions.ts";
 import {extractFormData, generateUUID} from "@/lib/tools/functions.ts";
+import {lead_fields_candidates} from "@/static_data/fields/condition.ts";
 
 export enum ButtonConditionItemActionRow {
     ADD_CONDITION_ITEM = 'ADD_CONDITION_ITEM',
@@ -20,7 +21,7 @@ window.handleSelection = (e: Event) => {
 window.handleFieldChange = (e: Event) => {
     const target = e.target as HTMLSelectElement;
     const selectedValue = target.value.trim();
-    const source = conditions_candidates.find(c => c.field.trim() === selectedValue);
+    const source = lead_fields_candidates.find(c => c.field.trim() === selectedValue);
 
     if (source) {
         updateRow(source, ButtonConditionItemActionRow.DELETE_CONDITION_ITEM, target.parentElement);
@@ -44,7 +45,7 @@ const updateRow = (source: ConditionFieldType, action: ButtonConditionItemAction
     const uuid = generateUUID()
     let rowContent = `
         <select class="select" name="condition[${uuid}]" onchange="handleFieldChange(event);">   
-            ${conditions_candidates.map(candidate => `<option ${candidate.field === source.field ? 'selected' : ''}>${candidate.field}</option>`).join('')}
+            ${lead_fields_candidates.map(candidate => `<option ${candidate.field === source.field ? 'selected' : ''}>${candidate.field}</option>`).join('')}
         </select>
         <select class="select" name="operator[${uuid}]" onchange="extractFormData(this.closest('form'))">
             ${source.operators.map(operator => `<option value="${operator.value}">${operator.label}</option>`).join('')}
@@ -60,6 +61,6 @@ const updateRow = (source: ConditionFieldType, action: ButtonConditionItemAction
     rowContainer.innerHTML = rowContent;
 };
 
-const createRow = (action: ButtonConditionItemActionRow, typeRow: ConditionType) => updateRow(conditions_candidates[0], action)
+const createRow = (action: ButtonConditionItemActionRow, typeRow: ConditionType) => updateRow(lead_fields_candidates[0], action)
 
 export {createRow};

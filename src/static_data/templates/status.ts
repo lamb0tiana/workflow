@@ -1,25 +1,9 @@
 import {statusType} from "@/lib/constant.ts";
 import {editor} from "@/main.ts";
 import {selectionId} from "@/lib/editor.ts";
+import {statuses} from "@/static_data/fields/status.ts";
 
 export type statusItemType = Partial<Record<statusType, string>>
-const statuses: statusItemType[] = [
-    {
-        "A traiter CRC": "#e83a75"
-    },
-    {
-        "En cours CRC": "#e2bb33"
-    },
-    {
-        "A traiter VN": "#e83a75"
-    },
-    {
-        "En cours VN": "#e2bb33"
-    },
-    {
-        "Clos":"#bebebe"
-    }
-]
 
 window.handleStatusChange = (e: Event) => {
     if (e.target) {
@@ -31,7 +15,7 @@ window.handleStatusChange = (e: Event) => {
         editor.updateNodeDataFromId(selectionId, {status: el.value})
     }
 }
-const get_statuses_template = () => `
+const get_statuses_template = (): string => `
 <select class="select" onchange="handleStatusChange(event)">
     ${statuses.map((status) => {
     const value = Object.keys(status)[0];

@@ -1,7 +1,7 @@
 import Drawflow, {ConnectionEvent} from "drawflow";
 import {NodeType} from "@/lib/constant.ts";
 import {notify} from "@/lib/tools/functions.ts";
-import {ConditionType, get_conditions_template} from "@/static_data/conditions.ts";
+import {ConditionType, get_conditions_template} from "@/static_data/templates/conditions.ts";
 
 let selectionId: number = 0
 const EditorEventHandler = (editor: Drawflow) => {

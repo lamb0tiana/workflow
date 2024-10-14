@@ -3,7 +3,7 @@ import '@/styles/base.css'
 import 'drawflow/dist/drawflow.min.css'
 import '@/styles/workflow.scss'
 import {handleDrag} from "@/lib/node.ts";
-import statuses from "@/static_data/statuses.ts";
+import statuses from "@/static_data/templates/status.ts";
 import {EditorEventHandler} from "@/lib/editor.ts";
 
 let editor: Drawflow;
