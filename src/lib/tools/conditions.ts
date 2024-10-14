@@ -21,12 +21,16 @@ window.handleSelection = (e: Event) => {
 
 window.handleFieldChange = (e: Event) => {
     const target = e.target as HTMLSelectElement;
-    const selectedValue = target.value.trim();
-    const source = lead_fields_candidates.find(c => c.field.trim() === selectedValue);
-
-    if (source) {
-        updateRow(source, ButtonConditionItemActionRow.DELETE_CONDITION_ITEM, target.parentElement);
+    if(target.parentElement?.parentElement){
+        const type = target.parentElement.parentElement.dataset.type
+        const selectedValue = target.value.trim();
+        const fields = type === ConditionType.LEAD ? lead_fields_candidates: action_fields_candidates
+        const source = fields.find(c => c.field.trim() === selectedValue);
+        if (source) {
+            updateRow(fields, ButtonConditionItemActionRow.DELETE_CONDITION_ITEM, target.parentElement);
+        }
     }
+
 };
 window.remove_condition_item_row = (event: MouseEvent) => {
     (event.target as HTMLElement)?.parentElement?.remove()
@@ -41,12 +45,13 @@ window.add_condition_row = (e: Event) => {
 }
 window.extractFormData = extractFormData
 
-const updateRow = (source: ConditionFieldType, action: ButtonConditionItemActionRow, rowContainer: HTMLElement | null = null) => {
+const updateRow = (fields: ConditionFieldType[], action: ButtonConditionItemActionRow, rowContainer: HTMLElement | null = null) => {
     const isFirstRow = rowContainer?.parentElement?.childElementCount === 1
     const uuid = generateUUID()
+    const source = fields[0]
     let rowContent = `
         <select class="select" name="condition[${uuid}]" onchange="handleFieldChange(event);">   
-            ${lead_fields_candidates.map(candidate => `<option ${candidate.field === source.field ? 'selected' : ''}>${candidate.field}</option>`).join('')}
+            ${fields.map(candidate => `<option ${candidate.field === source.field ? 'selected' : ''}>${candidate.field}</option>`).join('')}
         </select>
         <select class="select" name="operator[${uuid}]" onchange="extractFormData(this.closest('form'))">
             ${source.operators.map(operator => `<option value="${operator.value}">${operator.label}</option>`).join('')}
@@ -64,7 +69,7 @@ const updateRow = (source: ConditionFieldType, action: ButtonConditionItemAction
 
 const createRow = (action: ButtonConditionItemActionRow, typeRow: ConditionType) => {
     console.log(typeRow)
-    return updateRow(typeRow === ConditionType.LEAD ? lead_fields_candidates[0]: action_fields_candidates[0], action)
+    return updateRow(typeRow === ConditionType.LEAD ? lead_fields_candidates: action_fields_candidates, action)
 }
 
 export {createRow};
