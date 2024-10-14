@@ -1,4 +1,5 @@
-import {editor, selectionId} from "@/main.ts";
+import {editor} from "@/main.ts";
+import {selectionId} from "@/lib/editor.ts";
 
 const actions = ["affecter crc", "prendre rdv", "notification"]
 window.handleActionChange = (e: Event) => {

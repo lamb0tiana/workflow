@@ -66,10 +66,6 @@ const conditions_candidates: ConditionType[] = [
     }
 
 ]
-window.handleChangeCondition = (e: Event<HTMLInputElement>) => {
-console.log(e)
-    console.log('okdfsdfsf')
-}
 const get_conditions_template = () : string => `
 <div class="container flex flex-col gap-2">
     <form class="rows">

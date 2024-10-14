@@ -1,5 +1,6 @@
 import {statusType} from "@/lib/constant.ts";
-import {editor, selectionId} from "@/main.ts";
+import {editor} from "@/main.ts";
+import {selectionId} from "@/lib/editor.ts";
 
 export type statusItemType = Partial<Record<statusType, string>>
 const statuses: statusItemType[] = [
