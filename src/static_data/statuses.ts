@@ -26,7 +26,7 @@ window.handleStatusChange = (e: Event) => {
         const el = e.target as HTMLSelectElement
         const statusCandidate = statuses.find((status: statusItemType) => status[el.value as statusType])
         if (statusCandidate && el.parentNode?.parentNode) {
-            el.parentNode.parentNode.style.backgroundColor = Object.values(statusCandidate)[0]
+            (el.parentNode.parentNode as HTMLElement).style.backgroundColor = Object.values(statusCandidate)[0]
         }
         editor.updateNodeDataFromId(selectionId, {status: el.value})
     }
@@ -36,7 +36,7 @@ const get_statuses_template = () => `
     ${statuses.map((status) => {
     const value = Object.keys(status)[0];
     const color = Object.values(status)[0];
-    return `<option data-color="${color}" value="${value}">${value}</option>`;
+    return `<option data-color="${color}" value="${value}" >${value}</option>`;
 }).join('')}
 </select>
 `
