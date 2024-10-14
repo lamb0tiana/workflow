@@ -61,7 +61,5 @@ const lead_fields_candidates: ConditionFieldType[] = [
 
 ]
 
-const action_fields_candidates: ConditionFieldType[] = [
 
-]
-export {lead_fields_candidates, action_fields_candidates}
+export {lead_fields_candidates}

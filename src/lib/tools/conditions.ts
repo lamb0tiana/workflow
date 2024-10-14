@@ -1,6 +1,7 @@
-import {ConditionFieldType,  ConditionType} from "@/static_data/templates/conditions.ts";
+import {ConditionFieldType, ConditionType} from "@/static_data/templates/conditions.ts";
 import {extractFormData, generateUUID} from "@/lib/tools/functions.ts";
 import {lead_fields_candidates} from "@/static_data/fields/condition.ts";
+import {action_fields_candidates} from "@/static_data/fields/action.ts";
 
 export enum ButtonConditionItemActionRow {
     ADD_CONDITION_ITEM = 'ADD_CONDITION_ITEM',
@@ -61,6 +62,9 @@ const updateRow = (source: ConditionFieldType, action: ButtonConditionItemAction
     rowContainer.innerHTML = rowContent;
 };
 
-const createRow = (action: ButtonConditionItemActionRow, typeRow: ConditionType) => updateRow(lead_fields_candidates[0], action)
+const createRow = (action: ButtonConditionItemActionRow, typeRow: ConditionType) => {
+    console.log(typeRow)
+    return updateRow(typeRow === ConditionType.LEAD ? lead_fields_candidates[0]: action_fields_candidates[0], action)
+}
 
 export {createRow};

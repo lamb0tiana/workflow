@@ -31,17 +31,20 @@ const EditorEventHandler = (editor: Drawflow) => {
                     } else {
                         const target = `#node-${to_payload.id} .drawflow_content_node`;
                         const container = document.querySelector(target + ' form');
-                        if (!container) {
-                            const parser = new DOMParser();
-                            const templateType = from_name === NodeType.status ? ConditionType.LEAD : ConditionType.ACTION;
-                            const conditionsTemplate = get_conditions_template(templateType);
-                            const contentString = `<div class="container flex flex-col gap-2">${conditionsTemplate}</div>`;
-                            const content = parser.parseFromString(contentString, 'text/html');
-                            const targetNode = document.querySelector(target);
-                            if (targetNode) {
-                                targetNode.appendChild(content.body.firstElementChild as Node);
+                        const parser = new DOMParser();
+                        const templateType = from_name === NodeType.status ? ConditionType.LEAD : ConditionType.ACTION;
+                        if (container) {
+                            const set_type = (container as HTMLElement).dataset.type || ''
+                            if ((from_name === NodeType.status && set_type === ConditionType.LEAD) || (from_name === NodeType.action && set_type === ConditionType.ACTION)) {
+                                return
+                            } else {
+                                (document.querySelector(target) as HTMLElement).innerHTML = ''
                             }
                         }
+                        const conditionsTemplate = get_conditions_template(templateType);
+                        const contentString = `<div class="container flex flex-col gap-2">${conditionsTemplate}</div>`;
+                        const content = parser.parseFromString(contentString, 'text/html');
+                        document.querySelector(target)?.appendChild(content.body.firstElementChild as Node);
                     }
                 })
             } else if (from_type === NodeType.conditions) {

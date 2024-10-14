@@ -12,7 +12,7 @@ export enum ConditionType {
 }
 
 const get_conditions_template = (conditionType: ConditionType): string => `
-    <form class="rows">
+    <form class="rows" data-type="${conditionType}">
         <div class="flex gap-3">    
             ${createRow(ButtonConditionItemActionRow.ADD_CONDITION_ITEM, conditionType)} 
         </div>
