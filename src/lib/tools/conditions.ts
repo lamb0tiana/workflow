@@ -1,4 +1,4 @@
-import {conditions_candidates, ConditionFieldType} from "@/static_data/conditions.ts";
+import {ConditionFieldType, conditions_candidates, ConditionType} from "@/static_data/conditions.ts";
 import {extractFormData, generateUUID} from "@/lib/tools/functions.ts";
 
 export enum ButtonConditionItemActionRow {
@@ -32,8 +32,8 @@ window.remove_condition_item_row = (event: MouseEvent) => {
 
 window.add_condition_row = (e: Event) => {
     const parser = new DOMParser()
-    const container = (e.target as HTMLElement)?.parentElement;
-    const _row = `<div class="flex gap-3 mt-2">${createRow(ButtonConditionItemActionRow.DELETE_CONDITION_ITEM)}</div>`
+    const container = (e.target as HTMLElement)?.parentElement?.parentElement;
+    const _row = `<div class="flex gap-3 mt-2">${createRow(ButtonConditionItemActionRow.DELETE_CONDITION_ITEM, ConditionType.LEAD)}</div>`
     const doc = parser.parseFromString(_row, 'text/html')
     container?.appendChild(<HTMLElement>doc.body.firstElementChild)
 }
@@ -60,6 +60,6 @@ const updateRow = (source: ConditionFieldType, action: ButtonConditionItemAction
     rowContainer.innerHTML = rowContent;
 };
 
-const createRow = (action: ButtonConditionItemActionRow) => updateRow(conditions_candidates[0], action)
+const createRow = (action: ButtonConditionItemActionRow, typeRow: ConditionType) => updateRow(conditions_candidates[0], action)
 
 export {createRow};

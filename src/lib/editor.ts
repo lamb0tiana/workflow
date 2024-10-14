@@ -29,13 +29,18 @@ const EditorEventHandler = (editor: Drawflow) => {
                         notify("Un status ne peut pas être lier à la fois à une condition et une action.", 2000, "notification alert")
                         return
                     } else {
-                        if(from_name === NodeType.status){
-                            console.log(from_payload, to_payload)
-                            const target = `#node-${to_payload.id} .drawflow_content_node`
-                            const parser = new DOMParser()
-                            const content = parser.parseFromString(`<div class="container flex flex-col gap-2">${get_conditions_template(ConditionType.LEAD)}</div>`, 'text/html')
-                            document.querySelector(target)?.appendChild(content.body.firstElementChild as Node)
-
+                        const target = `#node-${to_payload.id} .drawflow_content_node`;
+                        const container = document.querySelector(target + ' form');
+                        if (!container) {
+                            const parser = new DOMParser();
+                            const templateType = from_name === NodeType.status ? ConditionType.LEAD : ConditionType.ACTION;
+                            const conditionsTemplate = get_conditions_template(templateType);
+                            const contentString = `<div class="container flex flex-col gap-2">${conditionsTemplate}</div>`;
+                            const content = parser.parseFromString(contentString, 'text/html');
+                            const targetNode = document.querySelector(target);
+                            if (targetNode) {
+                                targetNode.appendChild(content.body.firstElementChild as Node);
+                            }
                         }
                     }
                 })

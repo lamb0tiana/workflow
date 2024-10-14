@@ -72,14 +72,10 @@ const conditions_candidates: ConditionFieldType[] = [
 
 ]
 const get_conditions_template = (conditionType: ConditionType): string => `
-
     <form class="rows">
         <div class="flex gap-3">    
-            ${conditionType === ConditionType.LEAD ? createRow(ButtonConditionItemActionRow.ADD_CONDITION_ITEM) : ''} 
+            ${createRow(ButtonConditionItemActionRow.ADD_CONDITION_ITEM, conditionType)} 
         </div>
     </form>
-
-</div>
-
 `
 export {get_conditions_template, conditions_candidates}
