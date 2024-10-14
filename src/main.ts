@@ -50,16 +50,23 @@ window.addEventListener("load", () => {
 
         const {name: from_name, id: from_id} = from_payload
         const {name: to_name, id: to_id} = to_payload
+        const from_type = <NodeType>from_name
 
-        if ([NodeType.status, NodeType.action].includes(<NodeType>from_name) && to_name === NodeType.conditions) {
-            to_payload.inputs.input_1.connections.forEach(({node}) => {
-                const _node = editor.getNodeFromId(node)
-                if (_node.name !== from_payload.name) {
-                    editor.removeSingleConnection(from_id, to_id, 'output_1', 'input_1')
-                    notify("Un status ne peut pas être lier à la fois à une condition et une action.", 2000, "notification alert")
-                    return
-                }
-            })
+        if (to_name === NodeType.conditions) {
+            if([NodeType.status, NodeType.action].includes(from_type) ) {
+                to_payload.inputs.input_1.connections.forEach(({node}) => {
+                    const _node = editor.getNodeFromId(node)
+                    if (_node.name !== from_payload.name) {
+                        editor.removeSingleConnection(from_id, to_id, 'output_1', 'input_1')
+                        notify("Un status ne peut pas être lier à la fois à une condition et une action.", 2000, "notification alert")
+                        return
+                    }
+                })
+            }else if (from_type === NodeType.conditions){
+                editor.removeSingleConnection(from_id, to_id, 'output_1', 'input_1')
+                notify("Deux noeuds  conditions ne peuvent pas être enchainer de suite !", 2000, "notification alert")
+                return
+            }
         }
 
     })
