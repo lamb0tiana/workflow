@@ -36,7 +36,7 @@ const action_fields_candidates: ConditionFieldType[] = [
                 fieldType: FieldType.CHOICES,
                 operators: [
                     {
-                        label: "à",
+                        label: "est",
                         value: "="
                     }
                 ],
