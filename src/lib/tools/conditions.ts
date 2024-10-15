@@ -39,8 +39,9 @@ window.remove_condition_item_row = (event: MouseEvent) => {
 window.add_condition_row = (e: Event) => {
     const parser = new DOMParser()
     const container = (e.target as HTMLElement)?.parentElement?.parentElement;
-    const _row = `<div class="flex gap-3 mt-2">${createRow(ButtonConditionItemActionRow.DELETE_CONDITION_ITEM, ConditionType.LEAD)}</div>`
-    const doc = parser.parseFromString(_row, 'text/html')
+    const rowType = ConditionType[container?.dataset.type as never]
+    const row = `<div class="flex gap-3 mt-2">${createRow(ButtonConditionItemActionRow.DELETE_CONDITION_ITEM, rowType)}</div>`
+    const doc = parser.parseFromString(row, 'text/html')
     container?.appendChild(<HTMLElement>doc.body.firstElementChild)
 }
 window.extractFormData = extractFormData
