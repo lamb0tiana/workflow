@@ -70,9 +70,5 @@ const updateRow = (fields: ConditionFieldType[], action: ButtonConditionItemActi
     rowContainer.innerHTML = rowContent;
 };
 
-const createRow = (action: ButtonConditionItemActionRow, typeRow: ConditionType) => {
-    console.log(typeRow)
-    return updateRow(typeRow === ConditionType.LEAD ? lead_fields_candidates : action_fields_candidates, action)
-}
-
+const createRow = (action: ButtonConditionItemActionRow, typeRow: ConditionType) => updateRow(typeRow === ConditionType.LEAD ? lead_fields_candidates : action_fields_candidates, action)
 export {createRow};

@@ -22,31 +22,33 @@ const EditorEventHandler = (editor: Drawflow) => {
 
         if (to_name === NodeType.conditions) {
             if ([NodeType.status, NodeType.action].includes(from_type)) {
-                to_payload.inputs.input_1.connections.forEach(({node}) => {
+                const connections = to_payload.inputs.input_1.connections
+                for (const {node} of connections) {
                     const _node = editor.getNodeFromId(node)
                     if (_node.name !== from_payload.name) {
                         editor.removeSingleConnection(from_id, to_id, 'output_1', 'input_1')
                         notify("Un status ne peut pas être lier à la fois à une condition et une action.", 2000, "notification alert")
-                        return
+                        break
                     } else {
-                        const target = `#node-${to_payload.id} .drawflow_content_node`;
-                        const container = document.querySelector(target + ' form');
+                        const target = `#node-${to_payload.id} .drawflow_content_node`
+                        const container = document.querySelector(target + ' form')
                         const parser = new DOMParser();
-                        const templateType = from_name === NodeType.status ? ConditionType.LEAD : ConditionType.ACTION;
+                        const templateType = from_name === NodeType.status ? ConditionType.LEAD : ConditionType.ACTION
                         if (container) {
                             const set_type = (container as HTMLElement).dataset.type || ''
                             if ((from_name === NodeType.status && set_type === ConditionType.LEAD) || (from_name === NodeType.action && set_type === ConditionType.ACTION)) {
-                                return
+                                break
                             } else {
                                 (document.querySelector(target) as HTMLElement).innerHTML = ''
                             }
                         }
-                        const conditionsTemplate = get_conditions_template(templateType);
-                        const contentString = `<div class="container flex flex-col gap-2">${conditionsTemplate}</div>`;
-                        const content = parser.parseFromString(contentString, 'text/html');
-                        document.querySelector(target)?.appendChild(content.body.firstElementChild as Node);
+                        const conditionsTemplate = get_conditions_template(templateType)
+                        const contentString = `<div class="container flex flex-col gap-2">${conditionsTemplate}</div>`
+                        const content = parser.parseFromString(contentString, 'text/html')
+                        document.querySelector(target)?.appendChild(content.body.firstElementChild as Node)
                     }
-                })
+                }
+
             } else if (from_type === NodeType.conditions) {
                 editor.removeSingleConnection(from_id, to_id, 'output_1', 'input_1')
                 notify("Deux noeuds  conditions ne peuvent pas être enchainer de suite !", 2000, "notification alert")
