@@ -51,7 +51,7 @@ const action_fields_candidates: ConditionFieldType[] = [
         label: "Appel émis",
         fieldType: FieldType.BOOLEAN,
         subfields: [{
-            field: "is_customer_answered",
+            field: "Le client a répondu",
             label: "Le client a répondu",
             fieldType: FieldType.BOOLEAN,
             values: null,

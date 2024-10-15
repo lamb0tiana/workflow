@@ -45,5 +45,8 @@ const notify = (message: string, duration: number = 2000, class_name: string | n
         className: class_name || ''
     }).showToast();
 }
-
-export {generateUUID, extractFormData, notify}
+const flatArray =<T>(arr: (T | T[])[]): T[] =>
+    arr.reduce<T[]>((acc, val) =>
+        acc.concat(Array.isArray(val) ? flatArray(val) : val), []
+    );
+export {generateUUID, extractFormData, notify, flatArray}

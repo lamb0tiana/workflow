@@ -54,6 +54,9 @@ const extractFields = (typeRow: ConditionType): ConditionFieldType[] => {
         const selectActionDOM = <HTMLSelectElement>document.querySelector(`#node-${selectionId} select`)
         const selectedAction = selectActionDOM.value
         const candidates=  action_fields_candidates.filter(action => action.field === selectedAction)
+        if(candidates.length >0 && candidates[0].subfields){
+            return candidates[0].subfields
+        }
         return candidates[0]?.subfields ?? candidates
     }
     return lead_fields_candidates
