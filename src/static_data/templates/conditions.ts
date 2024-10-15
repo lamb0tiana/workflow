@@ -1,15 +1,6 @@
 import {ButtonConditionItemActionRow, createRow} from "@/lib/tools/conditions.ts";
+import {ConditionType} from "@/lib/types.ts";
 
-export type ConditionFieldType = {
-    field: string
-    operators: Record<"label" | "value", string>[]
-    values: string[] | null
-}
-
-export enum ConditionType {
-    LEAD = 'LEAD',
-    ACTION = 'ACTION'
-}
 
 const get_conditions_template = (conditionType: ConditionType, nodeId: number): string => `
     <form class="rows" data-type="${conditionType}" data-node="${nodeId}">

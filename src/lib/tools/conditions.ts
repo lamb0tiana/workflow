@@ -1,7 +1,7 @@
-import {ConditionFieldType, ConditionType} from "@/static_data/templates/conditions.ts";
 import {extractFormData, generateUUID} from "@/lib/tools/functions.ts";
 import {lead_fields_candidates} from "@/static_data/fields/condition.ts";
 import {action_fields_candidates} from "@/static_data/fields/action.ts";
+import {ConditionFieldType, ConditionType, FieldType} from "@/lib/types.ts";
 
 export enum ButtonConditionItemActionRow {
     ADD_CONDITION_ITEM = 'ADD_CONDITION_ITEM',
@@ -12,7 +12,6 @@ const remove_item_button = () => `<img  onclick="remove_condition_item_row(event
 const add_item_button = () => `<img  onclick="add_condition_row(event)" src="/icons/add.svg" class="w-6 hover:cursor-pointer" alt="plus"/> `
 window.handleSelection = (e: Event) => {
     if (e.target) {
-        console.log(e.target)
         const form = (e.target as HTMLElement).closest<HTMLElement>('form')
         extractFormData(<HTMLFormElement>form)
     }
@@ -38,7 +37,7 @@ window.remove_condition_item_row = (event: MouseEvent) => {
 
 window.add_condition_row = (e: Event) => {
     const container = (e.target as HTMLElement)?.parentElement?.parentElement;
-    if(container){
+    if (container) {
         const parser = new DOMParser()
         const rowType = ConditionType[container.dataset.type as never]
         const row = `<div class="flex gap-3 mt-2">${createRow(ButtonConditionItemActionRow.DELETE_CONDITION_ITEM, rowType)}</div>`
@@ -62,9 +61,9 @@ const updateRow = (fields: ConditionFieldType[], action: ButtonConditionItemActi
         <select class="select" name="operator[${uuid}]" onchange="extractFormData(this.closest('form'))">
             ${source.operators.map(operator => `<option value="${operator.value}">${operator.label}</option>`).join('')}
         </select>
-        ${source.values ?
+        ${source.values && source.fieldType === FieldType.CHOICES ?
         `<select class="select" name="value[${uuid}]" onchange="extractFormData(this.closest('form'))">
-                ${source.values.map(value => `<option value="${value}">${value || '(null)'}</option>`).join('')}
+                ${(source.values).map(value => `<option value="${value}">${value || '(null)'}</option>`).join('')}
             </select>` :
         `<input type="text" name="value[${uuid}]" placeholder="(null)" onchange="extractFormData(this.closest('form'))" />`}
     `;
