@@ -5,13 +5,16 @@ import { get_conditions_template} from "@/static_data/templates/conditions.ts";
 import {editor} from "@/main.ts";
 import {ConditionType} from "@/lib/types.ts";
 
-let selectionId: number = 0
+let selectionId: number| string = 0
 const EditorEventHandler = () => {
     editor.on('nodeCreated', (e) => {
         selectionId = e
     })
     editor.on('nodeSelected', (e) => {
         selectionId = e
+    })
+    editor.on('connectionStart', ({output_id}) => {
+        selectionId = output_id
     })
     editor.on('connectionCreated', (event: ConnectionEvent) => {
         const {input_id, output_id} = event

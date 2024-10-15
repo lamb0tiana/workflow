@@ -2,6 +2,7 @@ import {extractFormData, generateUUID} from "@/lib/tools/functions.ts";
 import {lead_fields_candidates} from "@/static_data/fields/condition.ts";
 import {action_fields_candidates} from "@/static_data/fields/action.ts";
 import {ConditionType, FieldType} from "@/lib/types.ts";
+import {selectionId} from "@/lib/editor.ts";
 
 export enum ButtonConditionItemActionRow {
     ADD_CONDITION_ITEM = 'ADD_CONDITION_ITEM',
@@ -49,12 +50,14 @@ window.add_condition_row = (e: Event) => {
 window.extractFormData = extractFormData
 
 const updateRow = (typeRow: ConditionType, action: ButtonConditionItemActionRow, selectElement: HTMLSelectElement | null = null) => {
+    const selected = selectElement?.value
     const fields = typeRow === ConditionType.LEAD ? lead_fields_candidates : action_fields_candidates
     const source = fields.find(f => f.field === selected) || fields[0]
     const isFirstRow = selectElement?.parentElement?.parentElement?.childElementCount === 1
     const uuid = generateUUID()
-    const selected = selectElement?.value
+
     const rowContainer = selectElement?.parentElement
+    console.log(selectionId)
     let rowContent = `
         <select class="select" name="condition[${uuid}]" onchange="handleFieldChange(event);">   
             ${fields.map(candidate => `<option ${candidate.field === selected ? 'selected' : ''}>${candidate.field}</option>`).join('')}
