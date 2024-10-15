@@ -1,7 +1,7 @@
-import Drawflow from "drawflow";
 import {NodeType} from "@/lib/constant.ts";
 import {get_statuses_template} from "@/static_data/templates/status.ts";
 import {get_actions_template} from "@/static_data/templates/action.ts";
+import {editor} from "@/main.ts";
 
 
 const renderOptions = (type: NodeType): string => {
@@ -14,7 +14,7 @@ const renderOptions = (type: NodeType): string => {
     return ""
 }
 
-const handleDrag = (id: HTMLElement, editor: Drawflow) => {
+const handleDrag = (id: HTMLElement) => {
     const paletteItems = document.querySelectorAll<HTMLDivElement>('#palette .node');
     paletteItems.forEach(item => {
         item.addEventListener('dragstart', (e: DragEvent) => {

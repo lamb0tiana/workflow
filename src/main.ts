@@ -8,7 +8,7 @@ import {EditorEventHandler} from "@/lib/editor.ts";
 
 let editor: Drawflow;
 
-export { editor}
+export {editor}
 
 window.addEventListener("load", () => {
     const DOM = document.getElementById("drawflow") as HTMLElement;
@@ -31,11 +31,8 @@ window.addEventListener("load", () => {
     })
 
     editor.start();
-
-    handleDrag(DOM, editor)
-    EditorEventHandler(editor)
-
-   
+    handleDrag(DOM)
+    EditorEventHandler()
 
     document.getElementById('export_action')?.addEventListener('click', () => {
         const data = editor.export()
