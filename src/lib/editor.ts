@@ -43,7 +43,7 @@ const EditorEventHandler = () => {
                                 (document.querySelector(target) as HTMLElement).innerHTML = ''
                             }
                         }
-                        const conditionsTemplate = get_conditions_template(templateType)
+                        const conditionsTemplate = get_conditions_template(templateType, to_id)
                         const contentString = `<div class="container flex flex-col gap-2">${conditionsTemplate}</div>`
                         const content = parser.parseFromString(contentString, 'text/html')
                         document.querySelector(target)?.appendChild(content.body.firstElementChild as Node)

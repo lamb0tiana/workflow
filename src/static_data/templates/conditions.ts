@@ -11,8 +11,8 @@ export enum ConditionType {
     ACTION = 'ACTION'
 }
 
-const get_conditions_template = (conditionType: ConditionType): string => `
-    <form class="rows" data-type="${conditionType}">
+const get_conditions_template = (conditionType: ConditionType, nodeId: number): string => `
+    <form class="rows" data-type="${conditionType}" data-node="${nodeId}">
         <div class="flex gap-3">    
             ${createRow(ButtonConditionItemActionRow.ADD_CONDITION_ITEM, conditionType)} 
         </div>
