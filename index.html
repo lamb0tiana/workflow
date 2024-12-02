@@ -1,39 +1,82 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"/>
-    <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Workflow</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Email</title>
+    <style>
+        /* Styles pour les clients e-mails prenant en charge les media queries */
+        @media screen and (max-width: 760px) {
+            .header, .main-content {
+                display: block;
+                width: 100% !important;
+            }
+            .logo-container, .logo-image {
+                text-align: center !important;
+            }
+            .separator {
+                display: none;
+            }
+            .text-center {
+                text-align: center !important;
+            }
+        }
 
+    </style>
 </head>
-<body>
-<div class=" flex  mx-auto">
-    <div id="palette" class="w-1/12 mt-5 px-2 flex flex-col justify-evenly">
-        <div class="nodes">
-            <div class="flex flex-col text-center">
-                <button class="node btn" data-type="status"  draggable="true">
-                    status
-                </button>
-            </div>
-            <div class="flex flex-col text-center">
-                <button class="node btn text-center" data-type="conditions"  draggable="true">Conditions</button>
-            </div>
-            <div class="flex flex-col text-center">
-                <button class="node btn text-center" data-type="action"  draggable="true">Action</button>
-            </div>
-        </div>
-        <div class="user_actions flex justify-center">
-            <button class="btn text-white flex items-center text-xs" id="export_action">
-                Exporter <img src="/icons/share.svg" class="w-5 h-5"/>
-            </button>
-        </div>
-    </div>
+<body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif; height: 100vh; display: flex; justify-content: center; align-items: center;">
+<table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#f4f4f4" style="height: 100%;">
+    <tr>
+        <td align="center" valign="middle" style="height: 100%;">
+            <table cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" style="margin: 20px 0; width: 100%;  max-width: 760px;">
+                <!-- Header -->
+                <tr>
+                    <td class="header" style="background-color: #000000; color: #ffffff; font-size: 16px; text-align: left;">
+                        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <!-- Section gauche -->
+                                <td class="logo-container" style="width: 40%; text-align: center; vertical-align: middle; background: url('STONE.svg') center center/cover no-repeat; height: 100px;">
+                                    <a href="https://www.easyplandetravail.com" style="color: #ffffff; text-decoration: none; font-size: 14px;">https://www.easyplandetravail.com</a>
+                                </td>
+                                <!-- Section droite -->
+                                <td class="logo-image" style="width: 60%; text-align: right; padding-right: 20px;">
+                                    <img src="LOGO_GROUP.svg" alt="Logo" style="max-width: 100%; height: auto;">
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
 
-    <div id="drawflow" class="h-screen w-full bg-gray-200"></div>
-</div>
+                <!-- Main Content -->
+                <tr>
+                    <td class="main-content" style="padding: 20px;">
+                        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <!-- Colonne gauche -->
+                                <td style="width: 40%; text-align: center; padding: 10px;">
+                                    <img src="logo_stacked.svg" alt="CB Surfaces Logo">
+                                </td>
 
+                                <!-- Ligne de séparation -->
+                                <td class="separator" style="width: 1px; background-color: #cccccc;"></td>
 
-<script type="module" src="/src/main.ts"></script>
+                                <!-- Colonne droite -->
+                                <td style="width: 59%; text-align: left; padding: 10px;">
+                                    <h2 style="font-size: 20px; font-weight: bold; margin: 0;">Baptiste Pelouin</h2>
+                                    <p style="font-size: 14px; color: #666666; margin: 5px 0;">Directeur Général</p>
+                                    <p style="font-size: 14px; color: #333333; margin: 10px 0;"><strong>Adresse :</strong> 39 Avenue de Friedland</p>
+                                    <p style="font-size: 14px; color: #333333; margin: 10px 0;"><strong>Email :</strong>
+                                        <a href="mailto:direction@cbsurfaces.com" style="color: #1a73e8; text-decoration: none;">direction@cbsurfaces.com</a>
+                                    </p>
+                                    <p style="font-size: 14px; color: #333333; margin: 10px 0;"><strong>Mobile :</strong> +33 6 25 05 31 83</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
 </body>
 </html>
