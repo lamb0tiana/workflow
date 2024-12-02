@@ -3,94 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Email</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet">
+    <title>Signature Email</title>
     <style>
-        @media screen and (max-width: 760px) {
-            .header, .main-content {
-                display: block;
-                width: 100% !important;
-            }
-            .logo-container, .logo-image {
-                text-align: center !important;
-            }
-            .separator {
-                display: none;
-            }
-            .text-center {
-                text-align: center !important;
-            }
+
+        .user_data span, .user_data a {
+            display: block;
+            color: #666666;
         }
 
+        .user_data p {
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            border: none;
+            width: 100%;
+        }
+
+        .bottom_logo {
+            display: none;
+        }
+
+        /* Ajouter un séparateur vertical en rouge */
+        .user_data {
+            position: relative; /* Permet au séparateur de se positionner en absolu par rapport à ce conteneur */
+            padding-left: 20px; /* Ajoute de l'espace avant le séparateur */
+        }
+
+        /* Création du séparateur qui s'étend de la cellule de contenu vers l'en-tête */
+        .user_data::before {
+            content: '';
+            position: absolute;
+            top: -4.5em;
+            left: 0;
+            width: 2px;
+            height: 13.5em;
+            background-color: gray;
+        }
+
+        @media screen and (max-width: 600px) {
+            .user_data {
+                display: block !important;
+            }
+
+            .top_logo {
+                display: none !important;
+            }
+
+            .bottom_logo {
+                display: block !important;
+                margin: auto;
+            }
+
+            table:first-of-type td:first-child {
+                padding-right: 12% !important;
+            }
+        }
     </style>
 </head>
 <body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif; height: 100vh; display: flex; justify-content: center; align-items: center;">
-<table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#f4f4f4" style="height: 100%;">
+<table style="margin: 20px 0; max-width: 760px; background-color: #000000; color: #ffffff;">
+    <!-- Header -->
     <tr>
-        <td align="center" valign="middle" style="height: 100%;">
-            <table cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" style="margin: 20px 0; width: 100%;  max-width: 760px;">
-                <!-- Header -->
+        <td style="width: 50%; text-align: center;padding-right: 20%; background: url(STONE.svg) no-repeat center right / cover; height: 100px;">
+            <a href="https://www.cbsurfaces.com" style="color: #ffffff; text-decoration: none; font-size: 14px;">
+                www.cbsurfaces.com
+            </a>
+        </td>
+        <td style="text-align: right; padding-right: 20px;">
+            <img src="LOGO_GROUP.svg" alt="Logo" style="max-width: 100%; height: auto;">
+        </td>
+    </tr>
+
+    <!-- Main Content -->
+    <tr style="background: #ffffff">
+        <td colspan="2">
+            <table style="width: 100%;" class="content">
                 <tr>
-                    <td class="header" style="background-color: #000000; color: #ffffff; font-size: 16px; text-align: left;">
-                        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <!-- Logo -->
+                    <td style="text-align: center;width: 30%" class="top_logo">
+                        <img src="logo_stacked.svg" alt="CB Surfaces Logo" style="max-width: 100%; height: auto;">
+                    </td>
+                    <!-- Content -->
+                    <td style="padding:20px 0 20px 38px;" class="user_data">
+                        <table style="color: #000000">
+                            <tr colspan="2">
+                                <td style="text-align: left; text-transform: uppercase;"><h2
+                                        style="font-size: 20px; font-weight: 600; margin: 0;font-family: 'Roboto Serif', serif;">
+                                    Baptiste
+                                    Pelouin</h2>
+                                </td>
+                            </tr>
+
                             <tr>
-                                <!-- Section gauche -->
-                                <td class="logo-container" style="width: 40%; text-align: center; background: url('STONE.svg') center center/cover no-repeat; height: 100px;">
-                                    <a href="https://www.easyplandetravail.com" style="color: #ffffff; text-decoration: none; font-size: 14px;">https://www.easyplandetravail.com</a>
+                                <td>
+                                    <p>
+                                        Poste <span style="display:block; color: #666666;">Directeur Général</span>
+                                    </p>
                                 </td>
-                                <!-- Section droite -->
-                                <td class="logo-image" style="width: 60%; text-align: right; padding-right: 20px;">
-                                    <img src="LOGO_GROUP.svg" alt="Logo" style="max-width: 100%; height: auto;">
-                                </td>
+                                <td><p>
+                                    Email <a href="mailto:direction@cbsurfaces.com" style=" text-decoration: none;">
+                                    direction@cbsurfaces.com
+                                </a>
+                                </p></td>
+                            </tr>
+                            <tr>
+                                <td><p>Adresse <span>39 Avenue de Friedland</span>
+                                </p></td>
+                                <td><p>Mobile <span>+33 6 25 05 31 83</span>
+                                </p></td>
                             </tr>
                         </table>
                     </td>
-                </tr>
-
-                <!-- Main Content -->
-                <tr>
-                    <td class="main-content" style="padding: 40px 20px;">
-                        <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                            <tr>
-                                <!-- Colonne gauche -->
-                                <td style="display: flex; text-align: center; padding: 10px; height: 100px;">
-                                    <img src="logo_stacked.svg" alt="CB Surfaces Logo" style="max-width: 100%; height: auto;">
-                                </td>
-
-
-                                <!-- Ligne de séparation -->
-                                <td class="separator" style="width: 1px; background-color: #cccccc; transform: translateY(-66px)"></td>
-
-                                <!-- Colonne droite -->
-                                <td style="width: 59%; text-align: left; padding: 0px 25px;">
-                                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                                        <tr style="margin-bottom: 10px">
-                                            <td style="width: 50%; padding-right: 10px; padding-bottom: 12px;vertical-align: top;">
-                                                <h2 style="font-size: 20px; font-weight: bold; margin: 0;">Baptiste Pelouin</h2>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <!-- Première colonne -->
-                                            <td style="width: 50%; padding-right: 10px; vertical-align: top;">
-                                                <p style="font-size: 14px;  margin: 10px 0;">Poste</p>
-                                                <p style="font-size: 14px; color: #666666; margin: 5px 0;">Directeur Général</p>
-                                                <p style="font-size: 14px;  margin: 10px 0;">Adresse</p>
-                                                <p style="font-size: 14px; color: #666666; margin: 5px 0;">39 Avenue de Friedland</p>
-                                            </td>
-                                            <!-- Deuxième colonne -->
-                                            <td style="width: 50%; padding-left: 10px; vertical-align: top;">
-                                                <p style="font-size: 14px; margin: 10px 0;">Email</p>
-                                                <p style="font-size: 14px; color: #333333; margin: 10px 0;">
-                                                    <a href="mailto:direction@cbsurfaces.com" style="color:#666666; text-decoration: none;">direction@cbsurfaces.com</a>
-                                                </p>
-                                                <p style="font-size: 14px; margin: 10px 0;">Mobile</p>
-                                                <p style="font-size: 14px; color: #666666; margin: 5px 0;">+33 6 25 05 31 83</p>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-
-                            </tr>
-                        </table>
+                    <td style="text-align: center;width: 30%" class="bottom_logo">
+                        <img src="logo_stacked.svg" alt="CB Surfaces Logo" style="max-width: 100%; height: auto;">
                     </td>
                 </tr>
             </table>
